@@ -1,0 +1,16 @@
+.collapse-toggler-heading
+    i.zmdi
+        transition: .3s
+    &[aria-expanded=true]
+        i.zmdi
+            transform: rotate(90deg)
+
+a[data-toggle="collapse"]
+    text-decoration: none
+
+body
+    padding-top: 56px
+
+.navbar-laravel
+    background-color: #fff
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04)
