@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateProduct;
 use App\Http\Requests\UpdateProduct;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Vanilo\Product\Models\ProductState;
 
@@ -96,6 +97,7 @@ final class ProductController extends Controller
 
     public function detail(Product $product)
     {
-        return view('product.detail', ['product' => $product]);
+        $seller = User::find($product->user_id);
+        return view('product.detail', ['product' => $product, 'seller' => $seller]);
     }
 }
