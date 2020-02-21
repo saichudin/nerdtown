@@ -37417,7 +37417,7 @@ function normalizeComponent (
       // for template-only hot-reload because in that case the render fn doesn't
       // go through the normalizer
       options._injectStyles = hook
-      // register for functioal component in vue file
+      // register for functional component in vue file
       var originalRender = options.render
       options.render = function renderWithStyleInjection (h, context) {
         hook.call(context)
@@ -49661,8 +49661,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/jowy/Projects/nerdtown/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/jowy/Projects/nerdtown/resources/sass/appshell.sass */"./resources/sass/appshell.sass");
+__webpack_require__(/*! /Users/saichudin/Sites/nerdtown/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/saichudin/Sites/nerdtown/resources/sass/appshell.sass */"./resources/sass/appshell.sass");
 
 
 /***/ })

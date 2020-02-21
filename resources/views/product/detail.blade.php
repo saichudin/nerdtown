@@ -45,6 +45,14 @@
                     <button type="submit" class="btn btn-success btn-lg" @if(!$product->price) disabled @endif>Add to cart</button>
                 </form>
 
+                <hr>
+                <div class="row">
+                    <div class="col-sm-5 col-md-5 col-5">
+                        <label style="font-weight:bold;">Seller : <a href="{{Route ('user.profile', $seller->id)}}" class="btn-sm btn-warning">{{$seller->first_name}} {{$seller->last_name}}</a></label>
+                    </div>
+                </div>
+                <hr />
+
                 @unless(empty($product->description))
                     <hr>
                     <p class="text-secondary">{!!  nl2br($product->description) !!}</p>

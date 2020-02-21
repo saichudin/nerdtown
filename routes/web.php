@@ -48,4 +48,10 @@ Route::group(['prefix' => 'messages', 'as' => 'messages.', 'middleware' => ['aut
     Route::get('{id}', ['uses' => 'MessagesController@update'])->name('update');
 });
 
+Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ['auth']], function () {
+    Route::get('/profile/{user}', ['uses' => 'UserProfileController@show'])->name('profile');
+    Route::get('/follow/{user}', ['uses' => 'UserProfileController@follow'])->name('follow');
+    Route::get('/unfollow/{user}', ['uses' => 'UserProfileController@unfollow'])->name('unfollow');
+});
+
 Auth::routes();
