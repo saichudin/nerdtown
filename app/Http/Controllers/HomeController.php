@@ -16,7 +16,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $products = $this->product->where('state', ProductState::ACTIVE)->orderBy('created_at')->paginate(20);
+        $products = $this->product->where('state', ProductState::ACTIVE)->orderBy('created_at')->get();
 
         return view('product.index', ['products' => $products]);
     }
