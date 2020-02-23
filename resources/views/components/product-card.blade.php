@@ -4,9 +4,10 @@
              @if($product->hasImage())
              src="{{ $product->getThumbnailUrl() }}"
              @else
-             src="http://placehold.it/700x400"
+             src="http://placehold.it/250"
              @endif
-             alt="{{ $product->name }}" />
+             alt="{{ $product->name }}"
+             height="250" />
     </a>
 
     <div class="card-body">

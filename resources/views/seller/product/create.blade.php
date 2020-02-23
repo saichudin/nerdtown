@@ -1,4 +1,3 @@
-Add
 @extends('front-base')
 
 @section('content')
