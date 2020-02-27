@@ -1,8 +1,9 @@
 @extends('front-base')
 
 @section('content')
-    <div class="container pt-4">
-        <h1 class="text-center">Create a new message</h1>
+    <div class="container">
+        <h1>Create a new message</h1>
+        <div class="row">
         <div class="col-md-12">
             <form action="{{ route('messages.store') }}" method="post">
                 {{ csrf_field() }}
@@ -24,7 +25,7 @@
                         <div class="checkbox">
                             @foreach($users as $user)
                                 <label title="{{ $user->name }}"><input type="checkbox" name="recipients[]"
-                                                                        value="{{ $user->id }}">{!!$user->name!!}</label>
+                                                                        value="{{ $user->id }}">{!!$user->username!!}</label>
                             @endforeach
                         </div>
                     @endif
@@ -35,6 +36,7 @@
                     </div>
                 </div>
             </form>
+        </div>
         </div>
     </div>
 @stop
