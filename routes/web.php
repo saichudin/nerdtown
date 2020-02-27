@@ -43,7 +43,7 @@ Route::group(['prefix' => 'seller', 'as' => 'seller.', 'middleware' => ['auth']]
 
 Route::group(['prefix' => 'messages', 'as' => 'messages.', 'middleware' => ['auth']], function () {
     Route::get('/', ['uses' => 'MessagesController@index'])->name('index');
-    Route::get('create', ['uses' => 'MessagesController@create'])->name('create');
+    Route::get('create/{recipient}', ['uses' => 'MessagesController@create'])->name('create');
     Route::post('/', ['uses' => 'MessagesController@store'])->name('store');
     Route::put('{id}', ['uses' => 'MessagesController@update'])->name('update');
     Route::get('/show/{thread}', ['uses' => 'MessagesController@show'])->name('show');

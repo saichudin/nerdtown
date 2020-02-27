@@ -65,11 +65,11 @@ final class MessagesController extends Controller
      *
      * @return mixed
      */
-    public function create()
+    public function create($id)
     {
         $users = User::where('id', '!=', Auth::id())->get();
-
-        return view('messenger.create', compact('users'));
+        $recipient = User::find($id);
+        return view('messenger.create', compact('users','recipient'));
     }
 
     /**

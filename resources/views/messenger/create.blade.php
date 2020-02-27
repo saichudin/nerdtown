@@ -21,17 +21,18 @@
                         <textarea name="message" class="form-control">{{ old('message') }}</textarea>
                     </div>
 
-                    @if($users->count() > 0)
-                        <div class="checkbox">
-                            @foreach($users as $user)
-                                <label title="{{ $user->name }}"><input type="checkbox" name="recipients[]"
-                                                                        value="{{ $user->id }}">{!!$user->username!!}</label>
-                            @endforeach
-                        </div>
-                    @endif
+{{--                    @if($users->count() > 0)--}}
+{{--                        <div class="checkbox">--}}
+{{--                            @foreach($users as $user)--}}
+{{--                                <label title="{{ $user->name }}"><input type="checkbox" name="recipients[]"--}}
+{{--                                                                        value="{{ $user->id }}">{!!$user->username!!}</label>--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
 
                 <!-- Submit Form Input -->
                     <div class="form-group">
+                        <input type="hidden" name="recipients" value="{{ $recipient->id }}">
                         <button type="submit" class="btn btn-primary form-control">Submit</button>
                     </div>
                 </div>
