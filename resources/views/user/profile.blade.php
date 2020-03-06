@@ -24,6 +24,7 @@
                                     @else
                                         <h6 class="d-block"><a class="btn btn-info" href="{{ route('user.follow', $user->id) }}">follow</a></h6>
                                     @endif
+                                    <h6 class="d-block"><a class="btn btn-success" href="{{ route('messages.create', $user->id) }}">Send Message</a></h6>
                                 </div>
 
                             </div>

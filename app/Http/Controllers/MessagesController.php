@@ -9,7 +9,7 @@ use Cmgmyr\Messenger\Models\Participant;
 use Cmgmyr\Messenger\Models\Thread;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Request;
+use Request;
 
 final class MessagesController extends Controller
 {
@@ -21,10 +21,10 @@ final class MessagesController extends Controller
     public function index()
     {
         // All threads, ignore deleted/archived participants
-        $threads = Thread::getAllLatest()->get();
+        //$threads = Thread::getAllLatest()->get();
 
         // All threads that user is participating in
-        // $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
+         $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
 
         // All threads that user is participating in, with new messages
         // $threads = Thread::forUserWithNewMessages(Auth::id())->latest('updated_at')->get();
@@ -65,11 +65,11 @@ final class MessagesController extends Controller
      *
      * @return mixed
      */
-    public function create()
+    public function create($id)
     {
         $users = User::where('id', '!=', Auth::id())->get();
-
-        return view('messenger.create', compact('users'));
+        $recipient = User::find($id);
+        return view('messenger.create', compact('users','recipient'));
     }
 
     /**
@@ -81,14 +81,14 @@ final class MessagesController extends Controller
     {
 
         $thread = Thread::create([
-            'subject' => $input['subject'],
+            'subject' => Request::input('subject'),
         ]);
 
         // Message
         Message::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
-            'body' => $input['message'],
+            'body' => Request::input('message'),
         ]);
 
         // Sender
@@ -100,10 +100,10 @@ final class MessagesController extends Controller
 
         // Recipients
         if (Request::has('recipients')) {
-            $thread->addParticipant($input['recipients']);
+            $thread->addParticipant(Request::input('recipients'));
         }
 
-        return redirect()->route('messages');
+        return redirect()->route('messages.index');
     }
 
     /**
