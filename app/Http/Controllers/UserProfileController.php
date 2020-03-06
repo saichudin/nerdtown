@@ -13,7 +13,6 @@ class UserProfileController extends Controller
     {
         $user = User::find(Auth::id());
         $followers = $user->followers;
-        //dd($followers);
         return view('user.myprofile', compact('user','followers'));
     }
 

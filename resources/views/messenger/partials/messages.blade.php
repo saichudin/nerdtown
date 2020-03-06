@@ -86,7 +86,7 @@
     </div>
     <div class="col-1">
         <img src="//www.gravatar.com/avatar/{{ md5($message->user->first_name) }} ?s=64" style="">
-        <h5 style="">{{ $message->user->username }}</h5>
+        <h5 style=""><a href="{{ route('user.profile', $message->user->id) }}"> {{ $message->user->username }} </a></h5>
     </div>
 </div>
 @endif

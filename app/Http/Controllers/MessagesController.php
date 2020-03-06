@@ -10,6 +10,7 @@ use Cmgmyr\Messenger\Models\Thread;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Request;
+use Session;
 
 final class MessagesController extends Controller
 {
@@ -67,9 +68,9 @@ final class MessagesController extends Controller
      */
     public function create($id)
     {
-        $users = User::where('id', '!=', Auth::id())->get();
+        //$users = User::where('id', '!=', Auth::id())->get();
         $recipient = User::find($id);
-        return view('messenger.create', compact('users','recipient'));
+        return view('messenger.create', compact('recipient'));
     }
 
     /**
@@ -79,7 +80,8 @@ final class MessagesController extends Controller
      */
     public function store(Request $input)
     {
-
+//        $a = Request::has('recipients');
+//        dd($a);
         $thread = Thread::create([
             'subject' => Request::input('subject'),
         ]);
@@ -102,6 +104,16 @@ final class MessagesController extends Controller
         if (Request::has('recipients')) {
             $thread->addParticipant(Request::input('recipients'));
         }
+        else {
+            // Send message to followers
+            $user = User::find(Auth::id());
+            $followers = $user->followers;
+            foreach($followers as $object)
+            {
+                $followerRecipient[] = $object->id;
+            }
+            $thread->addParticipant($followerRecipient);
+        }
 
         return redirect()->route('messages.index');
     }
@@ -119,7 +131,7 @@ final class MessagesController extends Controller
         } catch (ModelNotFoundException $e) {
             Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
 
-            return redirect()->route('messages');
+            return redirect()->route('messages.index');
         }
 
         $thread->activateAllParticipants();
@@ -145,5 +157,16 @@ final class MessagesController extends Controller
         }
 
         return redirect()->route('messages.show', $id);
+    }
+
+    public function broadcast()
+    {
+        $user = User::find(Auth::id());
+        $followers = $user->followers;
+        if (count($followers) == 0) {
+            Session::flash('error_message', 'Cannot create broadcast message, you does not have any follower yet');
+            return redirect()->route('messages.index');
+        }
+        return view('messenger.create', compact( 'followers'));
     }
 }
