@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Create a new message</h1>
+        <h1>Create message</h1>
         <div class="row">
         <div class="col-md-12">
             <form action="{{ route('messages.store') }}" method="post">
@@ -32,7 +32,9 @@
 
                 <!-- Submit Form Input -->
                     <div class="form-group">
+                        @if (isset($recipient))
                         <input type="hidden" name="recipients" value="{{ $recipient->id }}">
+                        @endif
                         <button type="submit" class="btn btn-primary form-control">Submit</button>
                     </div>
                 </div>

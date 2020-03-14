@@ -12,7 +12,7 @@
         <div>
             <strong>From:</strong> {{ $thread->creator()->username }}
             <strong>To:</strong> {{ $thread->participantsString(Auth::id(), ['username']) }}
-            on 2 Aug 2013
+            <strong>on</strong> {{ $thread->created_at->format('d M Y') }}
         </div>
     </div>
 </div>
